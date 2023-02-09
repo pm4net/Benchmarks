@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Engines;
 using BenchmarkDotNet.Jobs;
@@ -17,10 +14,10 @@ using OcelValue = OCEL.CSharp.OcelValue;
 
 namespace Benchmarks
 {
-    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 5, warmupCount: 3)]
-    [SimpleJob(RuntimeMoniker.Net481)]
     [RPlotExporter]
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 5, warmupCount: 3)]
+    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 5, warmupCount: 3)]
     public class OcelBenchmarks
     {
         [Params(1, 100, 1_000, 10_000, 100_000)]

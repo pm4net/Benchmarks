@@ -8,7 +8,8 @@ namespace Benchmarks
     {
         public static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<OcelBenchmarks>(args: args);
+            //var summary = BenchmarkRunner.Run<OcelBenchmarks>(args: args);
+            var summary = BenchmarkRunner.Run<SerilogBenchmarks>(args: args);
         }
     }
 }
