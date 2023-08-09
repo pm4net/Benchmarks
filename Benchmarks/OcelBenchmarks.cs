@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using BenchmarkDotNet.Attributes;
@@ -47,7 +47,7 @@ namespace Benchmarks
             _json = OcelJson.Serialize(_log, Formatting.None);
             _xml = OcelXml.Serialize(_log, Formatting.None);
             _db = new LiteDatabase(":memory:");
-            OcelLiteDB.Serialize(_db, _log);
+            OcelLiteDB.Serialize(_db, _log, false);
         }
 
         [Benchmark]
@@ -62,7 +62,7 @@ namespace Benchmarks
                 case "LiteDb":
                     // Can also use :temp: to write to actual file instead of memory, but doesn't make a significant difference.
                     var db = new LiteDatabase(":memory:");
-                    OcelLiteDB.Serialize(db, _log);
+                    OcelLiteDB.Serialize(db, _log, false);
                     db.Dispose();
                     break;
             }
