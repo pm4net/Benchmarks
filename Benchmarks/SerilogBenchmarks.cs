@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -9,6 +10,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using OCEL.Types;
 using Serilog;
+using Serilog.Enrichers.CallerInfo;
 using Serilog.Sinks.OCEL;
 
 namespace Benchmarks
@@ -23,6 +25,9 @@ namespace Benchmarks
 
         [Params("JSON", "XML", "LiteDb")]
         public string Format { get; set; }
+
+        [ParamsAllValues]
+        public bool UseEnricher { get; set; }
 
         private readonly string _projectDir;
         private string _currentFilePath;
@@ -42,18 +47,21 @@ namespace Benchmarks
                 case "JSON":
                     Log.Logger = new LoggerConfiguration()
                         .WriteTo.OcelJsonSink(new OcelJsonSinkOptions("C:\\Temp", $"log{fileGuid:N}.jsonocel", RollingPeriod.Never, Formatting.None))
+                        .Enrich.When(_ => UseEnricher, c => c.WithCallerInfo(true, new List<string> { "Benchmarks" }))
                         .CreateLogger();
                     _currentFilePath = Path.Combine("C:\\Temp", $"log{fileGuid:N}.jsonocel");
                     break;
                 case "XML":
                     Log.Logger = new LoggerConfiguration()
                         .WriteTo.OcelXmlSink(new OcelXmlSinkOptions("C:\\Temp", $"log{fileGuid:N}.xmlocel", RollingPeriod.Never, Formatting.None))
+                        .Enrich.When(_ => UseEnricher, c => c.WithCallerInfo(true, new List<string> { "Benchmarks" }))
                         .CreateLogger();
                     _currentFilePath = Path.Combine("C:\\Temp", $"log{fileGuid:N}.xmlocel");
                     break;
                 case "LiteDb":
                     Log.Logger = new LoggerConfiguration()
                         .WriteTo.OcelLiteDbSink(new LiteDbSinkOptions("C:\\Temp", $"log{fileGuid:N}.db", RollingPeriod.Never))
+                        .Enrich.When(_ => UseEnricher, c => c.WithCallerInfo(true, new List<string> { "Benchmarks" }))
                         .CreateLogger();
                     _currentFilePath = Path.Combine("C:\\Temp", $"log{fileGuid:N}.db");
                     break;
@@ -68,6 +76,7 @@ namespace Benchmarks
             {
                 Format = Format,
                 NoOfEvents = NoOfEvents,
+                UseEnricher = UseEnricher,
                 Framework = RuntimeInformation.FrameworkDescription,
                 FileSizeInBytes = size ?? 0
             };

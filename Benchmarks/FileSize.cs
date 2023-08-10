@@ -8,6 +8,8 @@ namespace Benchmarks
 
         public int NoOfEvents { get; set; }
 
+        public bool UseEnricher { get; set; }
+
         public string Framework { get; set; }
 
         public long FileSizeInBytes { get; set; }
