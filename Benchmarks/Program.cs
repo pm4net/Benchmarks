@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using BenchmarkDotNet.Configs;
+﻿using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
 namespace Benchmarks
@@ -8,8 +7,11 @@ namespace Benchmarks
     {
         public static void Main(string[] args)
         {
-            //var summary = BenchmarkRunner.Run<OcelBenchmarks>(args: args);
-            var summary = BenchmarkRunner.Run<SerilogBenchmarks>(args: args);
+#if DEBUG
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, new DebugInProcessConfig());
+#else
+            BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+#endif
         }
     }
 }
