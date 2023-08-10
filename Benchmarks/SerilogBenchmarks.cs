@@ -18,7 +18,7 @@ namespace Benchmarks
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 0)]
     public class SerilogBenchmarks
     {
-        [Params(1, 100, 1_000, 10_000, 100_000)]
+        [Params(1, 10, 100, 1_000, 10_000, 100_000)]
         public int NoOfEvents { get; set; }
 
         [Params("JSON", "XML", "LiteDb")]
