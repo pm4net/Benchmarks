@@ -76,7 +76,7 @@ namespace Benchmarks
                 case "JSON":
                     return OcelJson.Deserialize(_json, false);
                 case "XML":
-                    return OcelXml.Deserialize(_xml);
+                    return OcelXml.Deserialize(_xml, false);
                 case "LiteDb":
                     var log = OcelLiteDB.Deserialize(_db);
                     _db.Dispose();
