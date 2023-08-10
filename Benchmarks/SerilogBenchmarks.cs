@@ -71,7 +71,7 @@ namespace Benchmarks
         [IterationCleanup]
         public void IterationCleanup()
         {
-            var size = new FileInfo(_currentFilePath)?.Length;
+            var size = File.Exists(_currentFilePath) ? new FileInfo(_currentFilePath)?.Length : 0;
             var fileSize = new FileSize
             {
                 Format = Format,
@@ -87,8 +87,6 @@ namespace Benchmarks
             {
                 HasHeaderRecord = false
             };
-
-            Console.WriteLine($"File size: {size}, directory: {_projectDir}");
 
             var firstTimeWriting = !File.Exists(csvFile);
             using (var stream = File.Open(csvFile, FileMode.Append))
