@@ -7,6 +7,7 @@ using FSharpx;
 using Microsoft.FSharp.Core;
 using OCEL.CSharp;
 using pm4net.Types;
+using pm4net.Types.Trees;
 using OcelLog = OCEL.Types.OcelLog;
 
 namespace Benchmarks
@@ -42,7 +43,8 @@ namespace Benchmarks
                         LogLevel.Error, 
                         LogLevel.Fatal, 
                         LogLevel.Unknown
-                    }.ToFSharpList()), 
+                    }.ToFSharpList(),
+                    FSharpOption<ListTree<string>>.None),
                 _log.ObjectTypes.ToFSharpList(), 
                 _log);
         }
