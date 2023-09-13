@@ -20,8 +20,17 @@ namespace Benchmarks
     //[SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 1)]
     public class LayoutingBenchmarks
     {
+        public enum LayoutAlgorithm
+        {
+            Custom,
+            Msagl
+        }
+
         [Params("github_pm4py", "o2c", "p2p", "recruiting", "running-example", "transfer_order")] // "windows_events" runs super bad
         public string OcelFile { get; set; }
+
+        [ParamsAllValues]
+        public LayoutAlgorithm Algorithm { get; set; }
 
         private OcelLog _log;
         private DirectedGraph<Node<NodeInfo>, Edge<EdgeInfo>> _dfg;
@@ -51,9 +60,19 @@ namespace Benchmarks
         [Benchmark]
         public void DiscoverGraphLayout()
         {
-            var traces = OcelHelpers.AllTracesOfLog(_log).ToList();
-            var (globalOrder, globalRanking) = ProcessGraphLayout.FastDefault.ComputeGlobalOrderAndRanking(traces);
-            var layout = ProcessGraphLayout.FastDefault.ComputeLayout(globalOrder, globalRanking, _dfg, true, 20, 5f, 5f);
+            switch (Algorithm)
+            {
+                case LayoutAlgorithm.Msagl:
+                    pm4net.Visualization.Ocel.Msagl.OcDfg2Msagl(_dfg, false);
+                    break;
+                case LayoutAlgorithm.Custom:
+                    var traces = OcelHelpers.AllTracesOfLog(_log).ToList();
+                    var (globalOrder, globalRanking) = ProcessGraphLayout.FastDefault.ComputeGlobalOrderAndRanking(traces);
+                    var layout = ProcessGraphLayout.FastDefault.ComputeLayout(globalOrder, globalRanking, _dfg, true, 20, 5f, 5f);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }
