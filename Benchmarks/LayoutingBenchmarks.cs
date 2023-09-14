@@ -66,7 +66,7 @@ namespace Benchmarks
                     pm4net.Visualization.Ocel.Msagl.OcDfg2Msagl(_dfg, false);
                     break;
                 case LayoutAlgorithm.Custom:
-                    var traces = OcelHelpers.AllTracesOfLog(_log).ToList();
+                    var traces = OcelHelpers.AllTracesOfLog(_log);
                     var (globalOrder, globalRanking) = ProcessGraphLayout.FastDefault.ComputeGlobalOrderAndRanking(traces);
                     var layout = ProcessGraphLayout.FastDefault.ComputeLayout(globalOrder, globalRanking, _dfg, true, 20, 5f, 5f);
                     break;
