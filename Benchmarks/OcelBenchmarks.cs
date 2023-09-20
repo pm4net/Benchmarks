@@ -42,8 +42,8 @@ namespace Benchmarks
             _log = new OcelLog(new Dictionary<string, OcelValue>(), dict, new Dictionary<string, OcelObject>());
 
             // Serialize OCEL log to JSON, XML, and LiteDb so that it can be used to benchmark deserialization and validation
-            _json = OcelJson.Serialize(_log, Formatting.None);
-            _xml = OcelXml.Serialize(_log, Formatting.None);
+            _json = OcelJson.Serialize(_log, Formatting.None, false);
+            _xml = OcelXml.Serialize(_log, Formatting.None, false);
             _db = new LiteDatabase(":memory:");
             OcelLiteDB.Serialize(_db, _log, false);
         }
@@ -54,9 +54,9 @@ namespace Benchmarks
             switch (Format)
             {
                 case "JSON":
-                    return OcelJson.Serialize(_log, Formatting.None);
+                    return OcelJson.Serialize(_log, Formatting.None, false);
                 case "XML":
-                    return OcelXml.Serialize(_log, Formatting.None);
+                    return OcelXml.Serialize(_log, Formatting.None, false);
                 case "LiteDb":
                     // Can also use :temp: to write to actual file instead of memory, but doesn't make a significant difference.
                     var db = new LiteDatabase(":memory:");
