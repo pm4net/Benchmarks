@@ -36,11 +36,9 @@ namespace Benchmarks
         {
             // Please replace the below path with your actual absolute path. BenchmarkDotNet runs the program from various nested directories, making it difficult to use relative paths.
 #if NETCOREAPP
-            Console.WriteLine(".NET Core. Current path: " + Environment.CurrentDirectory);
-            _projectDir = Path.Combine(@"..\..\..\..\..\..\..\..\..\results\", "Benchmarks");
+            _projectDir = Path.Combine(@"..\..\..\..\..\..\..\..\..\..\results\", "Benchmarks");
 #else
-            Console.WriteLine(".NET Framework. Current path: " + Environment.CurrentDirectory);
-            _projectDir = Path.Combine(@"..\..\..\..\..\..\..\..\..\results\", "Benchmarks");
+            _projectDir = Path.Combine(@"..\..\..\..\..\..\results\", "Benchmarks");
 #endif
         }
 

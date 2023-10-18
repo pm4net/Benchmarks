@@ -26,13 +26,10 @@ namespace Benchmarks
         [IterationSetup]
         public void IterationSetup()
         {
-            // Please replace the below path with your actual absolute path. BenchmarkDotNet runs the program from various nested directories, making it difficult to use relative paths.
 #if NETCOREAPP
-            Console.WriteLine(".NET Core. Current path: " + Environment.CurrentDirectory);
-            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
+            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
 #else
-            Console.WriteLine(".NET Framework. Current path: " + Environment.CurrentDirectory);
-            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
+            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
 #endif
             _log = OcelJson.Deserialize(json, false).ToFSharpOcelLog();
         }
