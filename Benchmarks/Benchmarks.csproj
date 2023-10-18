@@ -21,8 +21,4 @@
     <Folder Include="Ocel\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\process-graph-layout\src\ProcessGraphLayout\ProcessGraphLayout.fsproj" />
-  </ItemGroup>
-
 </Project>
