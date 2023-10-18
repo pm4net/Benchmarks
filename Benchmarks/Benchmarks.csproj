@@ -6,6 +6,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Ocel\**" />
+    <EmbeddedResource Remove="Ocel\**" />
+    <None Remove="Ocel\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.13.9" />
     <PackageReference Include="CsvHelper" Version="30.0.1" />
     <PackageReference Include="FSharpx.Extras" Version="3.1.0" />
@@ -15,10 +21,6 @@
     <PackageReference Include="pm4net" Version="1.0.9" />
     <PackageReference Include="Serilog.Enrichers.CallerInfo" Version="1.0.4" />
     <PackageReference Include="Serilog.Sinks.OCEL" Version="1.0.10" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Ocel\" />
   </ItemGroup>
 
 </Project>

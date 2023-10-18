@@ -26,7 +26,7 @@ namespace Benchmarks
         public void IterationSetup()
         {
             // Please replace the below path with your actual absolute path. BenchmarkDotNet runs the program from various nested directories, making it difficult to use relative paths.
-            var json = File.ReadAllText(Path.Combine(@"your-path-here\Ocel", $"{OcelFile}.jsonocel"));
+            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
             _log = OcelJson.Deserialize(json, false).ToFSharpOcelLog();
         }
 
