@@ -14,7 +14,7 @@ namespace Benchmarks
 {
     [JsonExporter]
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 3, warmupCount: 1)]
-    //[SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 1)]
+    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 1)]
     public class Pm4NetBenchmarks
     {
         [Params("github_pm4py", "o2c", "p2p", "recruiting", "running-example", "transfer_order", "windows_events")]
@@ -25,7 +25,8 @@ namespace Benchmarks
         [IterationSetup]
         public void IterationSetup()
         {
-            var json = File.ReadAllText(Path.Combine(@"C:\Users\johan\source\repos\Benchmarks\Benchmarks\Ocel", $"{OcelFile}.jsonocel"));
+            // Please replace the below path with your actual absolute path. BenchmarkDotNet runs the program from various nested directories, making it difficult to use relative paths.
+            var json = File.ReadAllText(Path.Combine(@"your-path-here\Ocel", $"{OcelFile}.jsonocel"));
             _log = OcelJson.Deserialize(json, false).ToFSharpOcelLog();
         }
 

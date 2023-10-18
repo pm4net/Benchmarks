@@ -13,7 +13,7 @@ using OcelValue = OCEL.CSharp.OcelValue;
 
 namespace Benchmarks
 {
-    //[RPlotExporter]
+    [JsonExporter]
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 5, warmupCount: 3)]
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 5, warmupCount: 3)]
     public class OcelBenchmarks
