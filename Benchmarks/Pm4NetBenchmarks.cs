@@ -27,9 +27,11 @@ namespace Benchmarks
         public void IterationSetup()
         {
 #if NETCOREAPP
-            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
+            var path = Path.GetFullPath(Path.Combine("..", "..", "..", "data", "Benchmarks", $"{OcelFile}.jsonocel"));
+            var json = File.ReadAllText(path);
 #else
-            var json = File.ReadAllText(Path.Combine(@"..\..\..\..\..\..\data\Benchmarks", $"{OcelFile}.jsonocel"));
+            var path = Path.GetFullPath(Path.Combine("..", "..", "..", "..", "..", "..", "data", "Benchmarks", $"{OcelFile}.jsonocel"));
+            var json = File.ReadAllText(path);
 #endif
             _log = OcelJson.Deserialize(json, false).ToFSharpOcelLog();
         }
