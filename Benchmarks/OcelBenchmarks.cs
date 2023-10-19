@@ -14,11 +14,11 @@ using OcelValue = OCEL.CSharp.OcelValue;
 namespace Benchmarks
 {
     [JsonExporter]
-    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 5, warmupCount: 3)]
-    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 5, warmupCount: 3)]
+    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 3, warmupCount: 1)]
+    //[SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 1)]
     public class OcelBenchmarks
     {
-        [Params(1, 10, 100, 1_000, 10_000, 100_000)]
+        [Params(1, 10, 100, 1_000)]
         public int NoOfEvents { get; set; }
 
         [Params("JSON", "XML", "LiteDb")]
