@@ -33,8 +33,11 @@ namespace Benchmarks
 
         public SerilogBenchmarks()
         {
-            // Please replace the below path with your actual absolute path. BenchmarkDotNet runs the program from various nested directories, making it difficult to use relative paths.
-            _projectDir = Path.Combine(@"your-path-here\Benchmarks", "results");
+#if NETCOREAPP
+            _projectDir = Path.GetFullPath(Path.Combine("..", "..", "..", "..", "..", "..", "..", "..", "..", "..", "results", "Benchmarks"));
+#else
+            _projectDir = Path.GetFullPath(Path.Combine("..", "..", "..", "..", "..", "..", "results", "Benchmarks"));
+#endif
         }
 
         [IterationSetup]
