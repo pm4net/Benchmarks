@@ -17,7 +17,6 @@ namespace Benchmarks
 {
     [JsonExporter]
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 3, warmupCount: 0)]
-    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 0)]
     public class SerilogBenchmarks
     {
         [Params(1, 10, 100, 1_000, 10_000, 100_000)]

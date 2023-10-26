@@ -14,7 +14,6 @@ namespace Benchmarks
 {
     [JsonExporter]
     [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net70, iterationCount: 3, warmupCount: 1)]
-    [SimpleJob(RunStrategy.Monitoring, RuntimeMoniker.Net481, iterationCount: 3, warmupCount: 1)]
     public class Pm4NetBenchmarks
     {
         [Params("github_pm4py", "o2c", "p2p", "recruiting", "running-example", "transfer_order", "windows_events")]
